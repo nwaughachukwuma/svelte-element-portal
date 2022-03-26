@@ -8,8 +8,8 @@
 
     <div style="overlow: hidden">
       <ElementPortal target="#target">
-        <div data-testid="renderedInSection">Item 1</div>
-        <div slot="item" data-testid="portalElement1" />
+        <div data-testid="mainElement">Item 1</div>
+        <div slot="item" data-testid="portalElement" />
       </ElementPortal>
     </div>
   </main>
