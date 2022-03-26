@@ -3,17 +3,20 @@
   "version": "0.0.1",
   "description": "Make an element escape its parent overflow by rendering it over an ancestor element in the DOM :v:",
   "private": false,
+  "type": "module",
   "main": "lib/svelte-element-portal.js",
   "module": "lib/svelte-element-portal.mjs",
   "types": "types/index.d.ts",
   "svelte": "src/index.js",
   "scripts": {
     "build": "rollup -c",
-    "dev": "rollup -c -w"
+    "dev": "rollup -c -w",
+    "test": "ava"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^17.0.0",
     "@rollup/plugin-node-resolve": "^11.0.0",
+    "ava": "^4.1.0",
     "rollup": "^2.3.4",
     "rollup-plugin-svelte": "^7.0.0",
     "svelte": "^3.0.0"
