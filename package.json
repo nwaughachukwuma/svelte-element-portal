@@ -11,14 +11,33 @@
   "scripts": {
     "build": "rollup -c",
     "dev": "rollup -c -w",
-    "test": "ava"
+    "test": "jest test --env=jsdom",
+    "test:watch": "npm run test -- --watch"
   },
   "devDependencies": {
+    "@babel/preset-env": "^7.16.11",
     "@rollup/plugin-commonjs": "^17.0.0",
     "@rollup/plugin-node-resolve": "^11.0.0",
-    "ava": "^4.1.0",
+    "@testing-library/jest-dom": "^5.16.3",
+    "@testing-library/svelte": "^3.1.0",
+    "babel-jest": "^27.5.1",
+    "jest": "^27.5.1",
     "rollup": "^2.3.4",
     "rollup-plugin-svelte": "^7.0.0",
-    "svelte": "^3.0.0"
+    "svelte": "^3.0.0",
+    "svelte-jester": "^2.3.2"
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.js$": "babel-jest",
+      "^.+\\.svelte$": "svelte-jester"
+    },
+    "moduleFileExtensions": [
+      "js",
+      "svelte"
+    ],
+    "setupFilesAfterEnv": [
+      "@testing-library/jest-dom/extend-expect"
+    ]
   }
 }
