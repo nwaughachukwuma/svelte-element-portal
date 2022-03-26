@@ -1,8 +1,16 @@
-<script context="module" lang="ts">
-  const isHTMLElement = (el: any): el is HTMLElement =>
-    el instanceof HTMLElement;
+<script context="module">
+  /**
+   * @param {any} el any DOM element
+   * @returns {boolean} whether the element is an instance of HTMLElement
+   */
+  const isHTMLElement = (el) => el instanceof HTMLElement;
 
-  function getParentOffsets(el: HTMLElement, parent: HTMLElement) {
+  /**
+   * @param {HTMLElement} el
+   * @param {HTMLElement} parent
+   * @return {left: number, right: number, top: number, bottom: number}
+   */
+  function getParentOffsets(el, parent) {
     const rect = el.getBoundingClientRect();
     const pRect = parent.getBoundingClientRect();
 
@@ -15,22 +23,32 @@
   }
 </script>
 
-<script lang="ts">
+<script>
   import { tick, onMount } from "svelte";
 
-  /** HTMLElement or selector, which must have a defined position := relative */
-  export let target: HTMLElement | string = "body";
+  /**
+   * HTMLElement or selector, which must have a defined position := relative
+   * @type {HTMLElement|string}
+   */
+  export let target = "body";
 
-  let absItemEl: HTMLDivElement;
+  /**
+   * @type {HTMLDivElement}
+   */
+  let absItemEl;
   let showItem = false;
 
   onMount(() => {
     validateTarget(target).style.position = "relative";
   });
 
-  const validateTarget = (target: HTMLElement | string) => {
+  /**
+   * @param {HTMLElement | string} target
+   * @return {HTMLElement}
+   */
+  const validateTarget = (target) => {
     if (typeof target === "string") {
-      target = document.querySelector(target) as HTMLElement;
+      target = document.querySelector(target);
     } else if (!isHTMLElement(target)) {
       throw new TypeError(
         `Unknown target type: ${typeof target}. Allowed types: string (CSS selector) or HTMLElement.`
@@ -40,7 +58,10 @@
     return target;
   };
 
-  const cleanUpWrappers = (target: HTMLElement) => {
+  /**
+   * @param {HTMLElement} target
+   */
+  const cleanUpWrappers = (target) => {
     const wrappers = target.querySelectorAll<HTMLElement>("#item-wrapper");
     const visitedWrappers = Array.from(wrappers).filter(
       (el) => el.getAttribute("visited") === "true"
@@ -52,7 +73,10 @@
     }
   };
 
-  const hoverEnter = async (ev: PointerEvent) => {
+  /**
+   * @param {PointerEvent} ev
+   */
+  const hoverEnter = async (ev) => {
     target = validateTarget(target);
     cleanUpWrappers(target);
 
@@ -60,7 +84,7 @@
 
     target.appendChild(absItemEl);
 
-    const element = ev.target as HTMLElement;
+    const element = ev.target;
     const { top, left } = getParentOffsets(element, target);
 
     absItemEl.style.display = "inline-block";
@@ -72,7 +96,10 @@
     });
   };
 
-  const hoverLeave = (_ev: PointerEvent) => {
+  /**
+   * @param {PointerEvent} _ev
+   */
+  const hoverLeave = (_ev) => {
     showItem = false;
     absItemEl.style.display = "none";
   };
