@@ -1,0 +1,1 @@
+export {default as ElementPortal} from './ElementPortal.svelte';
