@@ -16,7 +16,7 @@ describe("<ElementPortal target />", () => {
         it("should not render item slot", () => {
             const { queryByTestId } = render(TestComponent)
     
-            const element = queryByTestId("portalElement");
+            const element = queryByTestId("portalItem");
             expect(element).not.toBeInTheDocument()
         });
     
@@ -27,14 +27,14 @@ describe("<ElementPortal target />", () => {
     
             await fireEvent.pointerEnter(element.parentElement)
             // wait for appearance to confirm the portal-item was rendered
-            const portalItem = await findByTestId('portalElement')
+            const portalItem = await findByTestId('portalItem')
             expect(portalItem).toBeInTheDocument()
     
             // confirm that the portal-item is rendered in the correct position, inside target.
-            const renderPortalElement = container.querySelector(
-                "#target [data-testid='portalElement']"
+            const renderPortalItem = container.querySelector(
+                "#target [data-testid='portalItem']"
             );
-            expect(renderPortalElement).toBeInTheDocument()
+            expect(renderPortalItem).toBeInTheDocument()
         });
     
         it("should remove item slot on pointerleave", async () => {
@@ -45,21 +45,21 @@ describe("<ElementPortal target />", () => {
             await fireEvent.pointerEnter(element.parentElement)
     
             await waitFor(() => {
-                const renderPortalElement = container.querySelector(
-                    "#target [data-testid='portalElement']"
+                const renderPortalItem = container.querySelector(
+                    "#target [data-testid='portalItem']"
                 );
-                expect(renderPortalElement).toBeInTheDocument()
+                expect(renderPortalItem).toBeInTheDocument()
             })
     
             await fireEvent.pointerLeave(element.parentElement)
              // confirm the portal-item was removed on pointerleave
-             const portalItem = queryByTestId('portalElement')
+             const portalItem = queryByTestId('portalItem')
              expect(portalItem).not.toBeInTheDocument()
         });
     })
 
     describe('MultiplePortalComponent.svelte', () => {
-        it("should render the default slots of all <PortalElement />", () => {
+        it("should render the default slots of all <portalItem />", () => {
             const { getAllByTestId } = render(MultiplePortalComponent)
 
             const elements = getAllByTestId(/mainElement\d/);
@@ -67,14 +67,14 @@ describe("<ElementPortal target />", () => {
             
             elements.forEach((element) => expect(element).toBeInTheDocument())
         });
-        it("should not render item slot of any <PortalElement />", () => {
+        it("should not render item slot of any <ElementPortal />", () => {
             const { queryAllByTestId } = render(MultiplePortalComponent)
     
-            const elements = queryAllByTestId(/portalElement\d/);
+            const elements = queryAllByTestId(/portalItem\d/);
             expect(elements).toHaveLength(0)
         });
 
-        it("should render item slot of a hovered <PortalElement />", async () => {
+        it("should render item slot of a hovered <ElementPortal />", async () => {
             const {getByTestId, findByTestId, getAllByTestId } = render(MultiplePortalComponent)
     
             const hoverElement = getByTestId("mainElement1");
@@ -82,17 +82,17 @@ describe("<ElementPortal target />", () => {
             await fireEvent.pointerEnter(hoverElement.parentElement)
 
             // confirm the portal-item was rendered
-            const portalItem = await findByTestId('portalElement1')
+            const portalItem = await findByTestId('portalItem1')
             expect(portalItem).toBeInTheDocument()
     
             // confirm the portal-item is the only rendered item slot
-            const elements = getAllByTestId(/portalElement\d/);
+            const elements = getAllByTestId(/portalItem\d/);
             expect(elements).toHaveLength(1)
             expect(elements[0]).toBe(portalItem)
         });
 
         it("should render only one portal-item in target", async () => {
-            //! mainElement4 uses PortalElement with same target as mainElement1
+            //! mainElement4 uses portalItem with same target as mainElement1
             const {getByTestId, queryByTestId } = render(MultiplePortalComponent)
     
             // hover mainElement1 first
@@ -100,10 +100,10 @@ describe("<ElementPortal target />", () => {
             await fireEvent.pointerEnter(element1.parentElement)
     
             await waitFor(() => {
-                const portalItem1 = queryByTestId('portalElement1')
+                const portalItem1 = queryByTestId('portalItem1')
                 expect(portalItem1).toBeInTheDocument()
 
-                const portalItem4 = queryByTestId('portalElement4')
+                const portalItem4 = queryByTestId('portalItem4')
                 expect(portalItem4).not.toBeInTheDocument()
             })
 
@@ -111,10 +111,10 @@ describe("<ElementPortal target />", () => {
             await fireEvent.pointerEnter(element4.parentElement)
 
             await waitFor(() => {
-                const portalItem1 = queryByTestId('portalElement1')
+                const portalItem1 = queryByTestId('portalItem1')
                 expect(portalItem1).not.toBeInTheDocument()
     
-                const portalItem4 = queryByTestId('portalElement4')
+                const portalItem4 = queryByTestId('portalItem4')
                 expect(portalItem4).toBeInTheDocument()
             })
         });

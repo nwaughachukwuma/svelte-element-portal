@@ -9,7 +9,7 @@
     <div style="overlow: hidden">
       <ElementPortal target="#target">
         <div data-testid="mainElement">Item 1</div>
-        <div slot="item" data-testid="portalElement" />
+        <div slot="item" data-testid="portalItem" />
       </ElementPortal>
     </div>
   </main>
