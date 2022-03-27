@@ -47,11 +47,15 @@
    * @return {HTMLElement}
    */
   const validateTarget = (target) => {
-    if (typeof target === "string") {
+    const targetType = typeof target;
+
+    if (targetType === "string") {
       target = document.querySelector(target);
-    } else if (!isHTMLElement(target)) {
+    }
+
+    if (!isHTMLElement(target)) {
       throw new TypeError(
-        `Unknown target type: ${typeof target}. Allowed types: string (CSS selector) or HTMLElement.`
+        `Unknown target type: ${targetType}. Allowed types: string (CSS selector) or HTMLElement must exist in the DOM.`
       );
     }
 

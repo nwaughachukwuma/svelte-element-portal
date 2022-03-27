@@ -1,7 +1,8 @@
 import '@testing-library/jest-dom'
-import { render, fireEvent, waitFor } from "@testing-library/svelte";
+import { render, fireEvent, waitFor, getElementError } from "@testing-library/svelte";
 import TestComponent from './TestComponent.svelte';
 import MultiplePortalComponent from './MultiplePortalComponent.svelte';
+import WrongTargetComponent from './WrongTargetComponent.svelte';
 
 describe("<ElementPortal target />", () => {
     describe('TestComponent.svelte', () => {
@@ -92,7 +93,7 @@ describe("<ElementPortal target />", () => {
 
         it("should render only one portal-item in target", async () => {
             //! mainElement4 uses PortalElement with same target as mainElement1
-            const {getByTestId, queryByTestId, findByTestId } = render(MultiplePortalComponent)
+            const {getByTestId, queryByTestId } = render(MultiplePortalComponent)
     
             // hover mainElement1 first
             const element1 = getByTestId("mainElement1");
@@ -117,5 +118,15 @@ describe("<ElementPortal target />", () => {
                 expect(portalItem4).toBeInTheDocument()
             })
         });
+    })
+
+    describe('WrongTargetComponent.svelte', () => {
+        it('should throw error when target is wrong or does not exist', () => {
+            try {
+                render(WrongTargetComponent)
+            } catch (error) {
+                expect(error instanceof TypeError).toBeTruthy()
+            }
+        })
     })
 })
