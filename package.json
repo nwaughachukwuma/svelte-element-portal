@@ -1,6 +1,6 @@
 {
   "name": "svelte-element-portal",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Escape parent overflow by rendering an element over its ancestor :v:",
   "private": false,
   "type": "module",
@@ -27,6 +27,17 @@
     "svelte": "^3.0.0",
     "svelte-jester": "^2.3.2"
   },
+  "files": [
+    "lib",
+    "src"
+  ],
+  "keywords": [
+    "portal",
+    "svelte",
+    "svelte-element-portal",
+    "escape overflow",
+    "escape parent overflow"
+  ],
   "jest": {
     "transform": {
       "^.+\\.js$": "babel-jest",
