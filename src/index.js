@@ -1,1 +1,1 @@
-export {default as ElementPortal} from './ElementPortal.svelte';
+export {default as default} from './ElementPortal.svelte';
