@@ -62,7 +62,7 @@
    * @param {HTMLElement} target
    */
   const cleanUpWrappers = (target) => {
-    const wrappers = target.querySelectorAll<HTMLElement>("#item-wrapper");
+    const wrappers = target.querySelectorAll("#item-wrapper");
     const visitedWrappers = Array.from(wrappers).filter(
       (el) => el.getAttribute("visited") === "true"
     );
@@ -76,7 +76,7 @@
   /**
    * @param {PointerEvent} ev
    */
-  const hoverEnter = async (ev) => {
+  const hoverIn = async (ev) => {
     target = validateTarget(target);
     cleanUpWrappers(target);
 
@@ -99,7 +99,7 @@
   /**
    * @param {PointerEvent} _ev
    */
-  const hoverLeave = (_ev) => {
+  const hoverOut = (_ev) => {
     showItem = false;
     absItemEl.style.display = "none";
   };
@@ -107,8 +107,8 @@
 
 <element-portal
   class="block"
-  on:pointerenter={hoverEnter}
-  on:pointerleave={hoverLeave}
+  on:pointerenter={hoverIn}
+  on:pointerleave={hoverOut}
 >
   <slot />
   <div
