@@ -1,6 +1,6 @@
 {
   "name": "svelte-element-portal",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Escape parent overflow by rendering an element over its ancestor :v:",
   "private": false,
   "type": "module",
@@ -31,6 +31,12 @@
     "lib",
     "src"
   ],
+  "exports": {
+    ".": {
+      "import": "./lib/svelte-element-portal.mjs",
+      "require": "./lib/svelte-element-portal.js"
+    }
+  },
   "keywords": [
     "portal",
     "svelte",
