@@ -62,7 +62,7 @@
    * @param {HTMLElement} target
    */
   const cleanUpWrappers = (target) => {
-    const wrappers = target.querySelectorAll("#item-wrapper");
+    const wrappers = target.querySelectorAll("[data-item-wrapper]");
     const visitedWrappers = Array.from(wrappers).filter(
       (el) => el.getAttribute("visited") === "true"
     );
@@ -112,7 +112,7 @@
 >
   <slot />
   <div
-    id="item-wrapper"
+    data-item-wrapper
     class="pointer-events-none absolute left-0 top-0 hidden"
     bind:this={absItemEl}
   >
