@@ -1,5 +1,4 @@
-import '@testing-library/jest-dom'
-import { render, fireEvent, waitFor, getElementError } from "@testing-library/svelte";
+import { render, fireEvent, waitFor } from "@testing-library/svelte";
 import TestComponent from './TestComponent.svelte';
 import MultiplePortalComponent from './MultiplePortalComponent.svelte';
 import WrongTargetComponent from './WrongTargetComponent.svelte';
@@ -25,7 +24,7 @@ describe("<ElementPortal target />", () => {
     
             const element = getByTestId("mainElement");
     
-            await fireEvent.pointerEnter(element.parentElement)
+            await fireEvent.pointerEnter(element)
             // wait for appearance to confirm the portal-item was rendered
             const portalItem = await findByTestId('portalItem')
             expect(portalItem).toBeInTheDocument()
@@ -42,7 +41,7 @@ describe("<ElementPortal target />", () => {
     
             const element = getByTestId("mainElement");
     
-            await fireEvent.pointerEnter(element.parentElement)
+            await fireEvent.pointerEnter(element)
     
             await waitFor(() => {
                 const renderPortalItem = container.querySelector(
@@ -51,7 +50,7 @@ describe("<ElementPortal target />", () => {
                 expect(renderPortalItem).toBeInTheDocument()
             })
     
-            await fireEvent.pointerLeave(element.parentElement)
+            await fireEvent.pointerLeave(element)
              // confirm the portal-item was removed on pointerleave
              const portalItem = queryByTestId('portalItem')
              expect(portalItem).not.toBeInTheDocument()
@@ -79,7 +78,7 @@ describe("<ElementPortal target />", () => {
     
             const hoverElement = getByTestId("mainElement1");
     
-            await fireEvent.pointerEnter(hoverElement.parentElement)
+            await fireEvent.pointerEnter(hoverElement)
 
             // confirm the portal-item was rendered
             const portalItem = await findByTestId('portalItem1')
@@ -97,7 +96,7 @@ describe("<ElementPortal target />", () => {
     
             // hover mainElement1 first
             const element1 = getByTestId("mainElement1");
-            await fireEvent.pointerEnter(element1.parentElement)
+            await fireEvent.pointerEnter(element1)
     
             await waitFor(() => {
                 const portalItem1 = queryByTestId('portalItem1')
@@ -108,7 +107,7 @@ describe("<ElementPortal target />", () => {
             })
 
             const element4 = getByTestId("mainElement4");
-            await fireEvent.pointerEnter(element4.parentElement)
+            await fireEvent.pointerEnter(element4)
 
             await waitFor(() => {
                 const portalItem1 = queryByTestId('portalItem1')
