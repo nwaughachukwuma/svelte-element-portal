@@ -80,7 +80,7 @@
   /**
    * @param {PointerEvent} ev
    */
-  const hoverIn = async (ev) => {
+  const show = async (ev) => {
     target = validateTarget(target);
     cleanUpWrappers(target);
 
@@ -103,18 +103,14 @@
   /**
    * @param {PointerEvent} _ev
    */
-  const hoverOut = (_ev) => {
+  const hide = (_ev) => {
     showItem = false;
     absItemEl.style.display = "none";
   };
 </script>
 
-<element-portal
-  class="block"
-  on:pointerenter={hoverIn}
-  on:pointerleave={hoverOut}
->
-  <slot />
+<element-portal>
+  <slot showItem={show} hideItem={hide} />
   <div
     data-item-wrapper
     class="pointer-events-none absolute left-0 top-0 hidden"
