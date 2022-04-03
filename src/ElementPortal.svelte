@@ -111,13 +111,19 @@
 
 <element-portal>
   <slot showItem={show} hideItem={hide} />
-  <div
-    data-item-wrapper
-    class="pointer-events-none absolute left-0 top-0 hidden"
-    bind:this={absItemEl}
-  >
+  <div data-item-wrapper class="item-wrapper" bind:this={absItemEl}>
     {#if showItem}
       <slot name="item" />
     {/if}
   </div>
 </element-portal>
+
+<style>
+  .item-wrapper {
+    pointer-events: none;
+    position: absolute;
+    left: 0;
+    top: 0;
+    display: none;
+  }
+</style>
