@@ -16,8 +16,12 @@ Make an element escape its parent overflow by rendering it over an ancestor elem
     <div id="target" />
 
     <div style="overlow: hidden">
-      <ElementPortal target="#target">
-        <div>Item 1</div>
+      <ElementPortal target="#target" let:showItem let:hideItem>
+        <div        
+          on:pointerenter={showItem}
+          on:pointerleave={hideItem}>
+          Item 1
+        </div>
         
         <tooltip slot="item" />
       </ElementPortal>
