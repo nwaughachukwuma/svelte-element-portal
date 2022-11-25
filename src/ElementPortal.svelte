@@ -27,7 +27,7 @@
   import { tick, onMount } from "svelte";
 
   /**
-   * HTMLElement or selector, which must have a defined position := relative
+   * HTMLElement or selector, which must have position := relative
    * @type {HTMLElement|string}
    */
   export let target = "body";
@@ -48,7 +48,6 @@
    */
   const validateTarget = (target) => {
     const targetType = typeof target;
-
     if (targetType === "string") {
       target = document.querySelector(target);
     }
